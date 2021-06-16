@@ -14,13 +14,12 @@ class ROI():
 
     def __init__(self,tax_rate,total_income={},expenses = 0,price = 0):
         self.expenses = expenses
-        self.total_income = total_income
+        self.total_income = total_income 
         self.tax_rate = tax_rate
         self.price = price
         
 
     def calculateIncome(self):  
-        
         bsr = int(input("What is your base rental income? $"))
         print(f"Base rental income: {bsr}")
         while True:
@@ -30,8 +29,8 @@ class ROI():
                 value_income = int(input(f"What is the monthly value of your {type_income}? $"))
                 self.total_income[type_income.title()] = value_income
             elif add_income.lower() == 'no':
-                total_income = sum(self.total_income.values()) + bsr
-                print(f"Your Total Monthly Income: ${total_income}")
+                self.total_income = sum(self.total_income.values()) + bsr
+                print(f"Your Total Monthly Income: ${self.total_income}")
                 break
             else:
                 print("Invalid entry")
@@ -85,8 +84,7 @@ class ROI():
             print("\nPlease calculate your expenses first.")
         else:
             print("\nCalculating your monthly cash flow...")
-            
-            self.price = sum(self.total_income.values()) - self.expenses
+            self.price = self.total_income - self.expenses
             time.sleep(5)
             print(f"TOTAL CASH FLOW: ${self.price}")
 
@@ -115,9 +113,9 @@ class ROI():
 # blueHouse = ROI(state_taxes[state])
 def run():
     state = input("Please input the two-letter abbreviation of the state your property resides: ")
+    property = ROI(state_taxes[state]) 
     while True:
               
-        property = ROI(state_taxes[state])  
         print("""Return On Investment Calculator - 
         - - - - - - - - -
         1. Calculate Income
